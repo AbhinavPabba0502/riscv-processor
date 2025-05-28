@@ -1,0 +1,97 @@
+onerror {resume}
+quietly WaveActivateNextPane {} 0
+add wave -noupdate -radix hexadecimal /riscv_tb/clk
+add wave -noupdate -radix hexadecimal /riscv_tb/reset
+add wave -noupdate -radix hexadecimal /riscv_tb/pc
+add wave -noupdate -radix hexadecimal /riscv_tb/result
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/clk
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/reset
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/pc
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/result
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/if_id_pc
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/id_ex_pc
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ex_mem_pc
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_wb_pc
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/if_id_inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/id_ex_inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ex_mem_inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_wb_inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/id_ex_rs1
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/id_ex_rs2
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ex_mem_alu_out
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_wb_alu_out
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ex_mem_mem_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_wb_mem_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/id_ex_rd
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ex_mem_rd
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_wb_rd
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_op
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_read
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/reg_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_src
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/branch
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/pc_reg
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/rs1_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/rs2_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/rs1
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/rs2
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/rd
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/imm
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_wb_reg_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_in2
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_out
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/mem_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ex_mem_rs2
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/imem/addr
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/imem/inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/inst
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/alu_op
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/mem_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/mem_read
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/reg_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/alu_src
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/branch
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/rs1
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/rs2
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/rd
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/imm
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/opcode
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/ctrl/funct3
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/clk
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/rs1
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/rs2
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/rd
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/write_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/reg_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/rs1_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/regs/rs2_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_inst/a
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_inst/b
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_inst/op
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/alu_inst/result
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/dmem/clk
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/dmem/addr
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/dmem/write_data
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/dmem/mem_write
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/dmem/mem_read
+add wave -noupdate -radix hexadecimal /riscv_tb/dut/dmem/read_data
+TreeUpdate [SetDefaultTree]
+WaveRestoreCursors {{Cursor 1} {121 ps} 0}
+quietly wave cursor active 1
+configure wave -namecolwidth 150
+configure wave -valuecolwidth 66
+configure wave -justifyvalue left
+configure wave -signalnamewidth 0
+configure wave -snapdistance 10
+configure wave -datasetprefix 0
+configure wave -rowmargin 4
+configure wave -childrowmargin 2
+configure wave -gridoffset 0
+configure wave -gridperiod 1
+configure wave -griddelta 40
+configure wave -timeline 0
+configure wave -timelineunits ps
+update
+WaveRestoreZoom {0 ps} {130 ps}
