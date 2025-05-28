@@ -1,4 +1,4 @@
-# risv-processor
+# riscv-processor
 A 32-bit RISC-V processor implementation in Verilog.
 
 RISC-V Processor (RV32I) Implementation
