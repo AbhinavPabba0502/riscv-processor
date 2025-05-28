@@ -1,0 +1,27 @@
+Verilog/SystemVerilog files
+
+*.vcd *.wlf *.log transcript work/
+
+Xilinx Vivado files
+
+*.xpr *.hw/ *.ip_user_files/ *.sim/ *.runs/ *.cache/ *.srcs/ *.sdk/ *.bit *.bin *.prm *.rpt *.dcp *.jou *.str *.xml *.zip
+
+ModelSim/QuestaSim files
+
+vsim.wlf *.mpf *.ini *.mti *.bak *.vstf *.sdo *.ucdb
+
+General build and temporary files
+
+*.o *.obj *.bak *.tmp *.swp *.swo *.pyc pycache/
+
+Editor/IDE files
+
+.vscode/ .idea/ *.sublime-project *.sublime-workspace
+
+macOS files
+
+.DS_Store
+
+Windows files
+
+Thumbs.db
