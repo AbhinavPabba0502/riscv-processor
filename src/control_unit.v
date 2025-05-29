@@ -1,48 +1,68 @@
 module control_unit (
-    input [31:0] inst,
-    output reg [3:0] alu_op,
-    output reg mem_write,
-    output reg mem_read,
-    output reg reg_write,
-    output reg [1:0] alu_src,
-    output reg branch,
-    output [4:0] rs1,
-    output [4:0] rs2,
-    output [4:0] rd,
-    output [31:0] imm
+    input  [6:0] opcode,       // Instruction opcode
+    input  [2:0] funct3,       // Function code for R-type and some I-type instructions
+    input  [6:0] funct7,       // Function code for R-type instructions
+    output reg [2:0] alu_op,   // ALU operation: 000=ADD, 001=SUB, 010=SLT, 011=OR, 100=AND
+    output reg       mem_write,// Data memory write enable
+    output reg       reg_write,// Register file write enable
+    output reg       alu_src,  // ALU srcB select (0=reg, 1=imm)
+    output reg       mem_to_reg,// Write-back source (0=ALU, 1=mem)
+    output reg       branch    // Branch signal
 );
-    wire [6:0] opcode = inst[6:0];
-    wire [2:0] funct3 = inst[14:12];
+
     always @(*) begin
+        // Default values
+        alu_op     = 3'b000;
+        mem_write  = 1'b0;
+        reg_write  = 1'b0;
+        alu_src    = 1'b0;
+        mem_to_reg = 1'b0;
+        branch     = 1'b0;
+
         case (opcode)
-            7'b0110011: begin // R-type (ADD)
-                alu_op = (funct3 == 3'b000) ? 4'b0000 : 4'b0001;
-                mem_write = 0;
-                mem_read = 0;
-                reg_write = 1;
-                alu_src = 2'b00;
-                branch = 0;
+            7'b0110011: begin // R-type (ADD, SUB, SLT, OR, AND)
+                reg_write = 1'b1;
+                alu_src   = 1'b0;
+                mem_to_reg = 1'b0;
+                case ({funct7, funct3})
+                    10'b0000000_000: alu_op = 3'b000; // ADD
+                    10'b0100000_000: alu_op = 3'b001; // SUB
+                    10'b0000000_010: alu_op = 3'b010; // SLT
+                    10'b0000000_110: alu_op = 3'b011; // OR
+                    10'b0000000_111: alu_op = 3'b100; // AND
+                    default: alu_op = 3'b000;         // Default to ADD
+                endcase
             end
             7'b0010011: begin // I-type (ADDI)
-                alu_op = 4'b0000;
-                mem_write = 0;
-                mem_read = 0;
-                reg_write = 1;
-                alu_src = 2'b01;
-                branch = 0;
+                reg_write = 1'b1;
+                alu_src   = 1'b1;
+                mem_to_reg = 1'b0;
+                alu_op    = 3'b000; // ADD
+            end
+            7'b0000011: begin // I-type (LW)
+                reg_write = 1'b1;
+                alu_src   = 1'b1;
+                mem_to_reg = 1'b1;
+                alu_op    = 3'b000; // ADD for address calculation
+            end
+            7'b0100011: begin // S-type (SW)
+                mem_write = 1'b1;
+                alu_src   = 1'b1;
+                alu_op    = 3'b000; // ADD for address calculation
+            end
+            7'b1100011: begin // B-type (BEQ)
+                branch    = 1'b1;
+                alu_src   = 1'b0;
+                alu_op    = 3'b001; // SUB for comparison
             end
             default: begin
-                alu_op = 4'b0000;
-                mem_write = 0;
-                mem_read = 0;
-                reg_write = 0;
-                alu_src = 2'b00;
-                branch = 0;
+                alu_op     = 3'b000;
+                mem_write  = 1'b0;
+                reg_write  = 1'b0;
+                alu_src    = 1'b0;
+                mem_to_reg = 1'b0;
+                branch     = 1'b0;
             end
         endcase
     end
-    assign rs1 = inst[19:15];
-    assign rs2 = inst[24:20];
-    assign rd = inst[11:7];
-    assign imm = {{20{inst[31]}}, inst[31:20]};
 endmodule
