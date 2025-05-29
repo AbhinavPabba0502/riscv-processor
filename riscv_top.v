@@ -10,7 +10,7 @@ module riscv_top (
     reg [31:0] if_id_inst;
     reg [31:0] id_ex_operand1, id_ex_operand2, id_ex_imm;
     reg [4:0]  id_ex_rd, ex_mem_rd, mem_wb_rd;
-    reg [2:0]  id_ex_alu_op;  // Updated to 3 bits to match alu_op
+    reg [2:0]  id_ex_alu_op;
     reg        id_ex_alu_src, id_ex_mem_write, id_ex_reg_write, id_ex_mem_to_reg, id_ex_branch;
     reg        ex_mem_mem_write, ex_mem_reg_write, ex_mem_mem_to_reg, ex_mem_branch;
     reg        mem_wb_reg_write, mem_wb_mem_to_reg;
@@ -34,7 +34,7 @@ module riscv_top (
         .instr(instruction)
     );
 
-    assign next_pc = (ex_mem_branch && ex_mem_zero) ? ex_mem_result : (pc_reg + 4);
+    assign next_pc = ex_mem_branch && ex_mem_zero ? ex_mem_result : (pc_reg + 4);
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -125,7 +125,7 @@ module riscv_top (
         .zero(zero)
     );
 
-    wire [31:0] branch_target = id_ex_pc + id_ex_imm;
+    wire [31:0] branch_target = id_ex_pc + (id_ex_imm << 1);
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin

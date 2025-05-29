@@ -1,13 +1,21 @@
 module instruction_memory (
-    input [31:0] addr,
-    output [31:0] inst
+    input  [31:0] addr,
+    output [31:0] instr
 );
-    reg [31:0] mem [0:255];
+    reg [31:0] mem [0:255]; // 256-word instruction memory
+
     initial begin
-        // Sample instructions (ADD, LW, BEQ)
-        mem[0] = 32'h00500293; // addi x5, x0, 5
-        mem[4] = 32'h00A00313; // addi x6, x0, 10
-        mem[8] = 32'h006283B3; // add x7, x5, x6
+        // Example instructions (replace with your own)
+        mem[0] = 32'h005302b3; // ADD x5, x6, x5
+        mem[1] = 32'h405302b3; // SUB x5, x6, x5
+        mem[2] = 32'h00530333; // SLT x6, x6, x5
+        mem[3] = 32'h005363b3; // OR x7, x6, x5
+        mem[4] = 32'h005373b3; // AND x7, x6, x5
+        mem[5] = 32'h00530093; // ADDI x1, x6, 5
+        mem[6] = 32'h00032083; // LW x1, 0(x6)
+        mem[7] = 32'h00532023; // SW x5, 0(x6)
+        mem[8] = 32'hfe528ee3; // BEQ x5, x5, -4
     end
-    assign inst = mem[addr[9:2]];
+
+    assign instr = mem[addr >> 2];
 endmodule

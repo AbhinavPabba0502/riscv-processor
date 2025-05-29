@@ -1,15 +1,16 @@
 module data_memory (
-    input clk,
-    input [31:0] addr,
-    input [31:0] write_data,
-    input mem_write,
-    input mem_read,
+    input         clk,
+    input  [31:0] addr,
+    input  [31:0] write_data,
+    input         write_enable,
     output [31:0] read_data
 );
-    reg [31:0] mem [0:255];
+    reg [31:0] mem [0:255]; // 256-word data memory
+
     always @(posedge clk) begin
-        if (mem_write)
-            mem[addr[9:2]] <= write_data;
+        if (write_enable)
+            mem[addr >> 2] <= write_data;
     end
-    assign read_data = mem_read ? mem[addr[9:2]] : 0;
+
+    assign read_data = mem[addr >> 2];
 endmodule
